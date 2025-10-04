@@ -5,11 +5,8 @@ import { OrbitControls, Html } from "@react-three/drei";
 import Planet from "../../components/Planet";
 import CameraRig from "../../components/CameraRig";
 import Starfield from "../../components/Starfield";
-import HUD from "../../components/HUD";
-import Sun from "../../components/Sun";
-import Moon from "../../components/Moon";
 import usePlanetStore from "../../store/usePlanetStore";
-import { motion } from "framer-motion";
+// framer-motion removed (no HUD / audio UI)
 
 const planets = [
   {
@@ -85,9 +82,6 @@ export default function SolarSystemPage() {
         <Suspense fallback={<Html center>Loading Scene...</Html>}>
           <Starfield />
           <group>
-            {/* Sun at center */}
-            <Sun position={[0, 0, 0]} />
-
             {planets.map((p, i) => (
               <Planet
                 key={p.name}
@@ -97,9 +91,6 @@ export default function SolarSystemPage() {
                 onClick={() => setActive(i)}
               />
             ))}
-
-            {/* Moon orbiting Earth (Earth is at distance 9) */}
-            <Moon earthPos={[9, 0, 0]} distance={1.8} speed={0.9} />
           </group>
           <CameraRig />
         </Suspense>
@@ -110,16 +101,7 @@ export default function SolarSystemPage() {
         />
       </Canvas>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="absolute top-6 left-6"
-      >
-        <HUD />
-      </motion.div>
-
-      {/* audio controller removed */}
+      {/* HUD and AudioController removed */}
     </div>
   );
 }

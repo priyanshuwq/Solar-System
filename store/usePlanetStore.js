@@ -3,7 +3,15 @@ import { create } from "zustand";
 export const usePlanetStore = create((set, get) => ({
   active: 2,
   planetRefs: {},
-  // (audio removed)
+  // audio state
+  audio: {
+    volume: 0.25,
+    muted: false,
+  },
+  setAudioVolume: (v) =>
+    set((state) => ({ audio: { ...state.audio, volume: v } })),
+  setAudioMuted: (m) =>
+    set((state) => ({ audio: { ...state.audio, muted: m } })),
   setActive: (i) => set({ active: i }),
   registerPlanetRef: (index, ref) =>
     set((state) => ({ planetRefs: { ...state.planetRefs, [index]: ref } })),

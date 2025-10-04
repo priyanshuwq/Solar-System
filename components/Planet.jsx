@@ -36,6 +36,8 @@ export default function Planet({
   async function handleClick() {
     if (detailView) return;
     if (onClick) onClick();
+    // wait a short moment to let CameraRig animate (camera tween triggered by store change)
+    await new Promise((res) => setTimeout(res, 300));
     router.push(`/planet/${data.name.toLowerCase()}`);
   }
 
